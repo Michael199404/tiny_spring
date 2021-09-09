@@ -1,5 +1,6 @@
 package com.chao.springframework.test;
 
+import com.chao.springframework.beans.factory.config.BeanDefinition;
 import com.chao.springframework.beans.factory.support.DefaultListableBeanFactory;
 import com.chao.springframework.test.bean.UserService;
 import org.junit.Test;
