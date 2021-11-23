@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="small-spring-step-06" />
         <module name="small-spring-step-05" />
         <module name="small-spring-step-04" />
         <module name="small-spring-step-03" />
