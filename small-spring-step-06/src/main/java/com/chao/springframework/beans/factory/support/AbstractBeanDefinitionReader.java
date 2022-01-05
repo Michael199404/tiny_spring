@@ -1,5 +1,6 @@
 package com.chao.springframework.beans.factory.support;
 
+import com.chao.springframework.beans.BeansException;
 import com.chao.springframework.core.io.DefaultResourceLoader;
 import com.chao.springframework.core.io.ResourceLoader;
 
@@ -27,4 +28,5 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
     public ResourceLoader getResourceLoader() {
         return resourceLoader;
     }
+
 }

@@ -1,7 +1,13 @@
 
-z	java:S135B"YReduce the total number of break and continue statements in this loop to use at most one.(éığöüÿÿÿÿ8Ñ¡á¾/
+š
+java:S11307"xRemove the declaration of thrown exception 'com.chao.springframework.beans.BeansException' which is a runtime exception.(§åÃ¬ÿÿÿÿÿ8ÍÍø¦â/
 t
 java:S3776="RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ˆéØñøÿÿÿÿ8ÅÑù¾/
 O
 java:S1128"-Remove this unused import 'org.w3c.dom.Node'.(ùŠÿËıÿÿÿÿ8ê§ş¾/
+š
+java:S1130%"xRemove the declaration of thrown exception 'com.chao.springframework.beans.BeansException' which is a runtime exception.(ÂÕ¬·úÿÿÿÿ8ÍÍø¦â/
+š
+java:S11300"xRemove the declaration of thrown exception 'com.chao.springframework.beans.BeansException' which is a runtime exception.(ºŸ©Öùÿÿÿÿ8ÍÍø¦â/
+z	java:S135B"YReduce the total number of break and continue statements in this loop to use at most one.(éığöüÿÿÿÿ8Ñ¡á¾/
 z	java:S135X"YReduce the total number of break and continue statements in this loop to use at most one.(öºÜÔÿÿÿÿÿ8ÅÑù¾/

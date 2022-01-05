@@ -4,6 +4,11 @@ import cn.hutool.core.bean.BeanException;
 import com.chao.springframework.beans.BeansException;
 import com.chao.springframework.beans.factory.BeanFactory;
 import com.chao.springframework.beans.factory.config.BeanDefinition;
+import com.chao.springframework.beans.factory.config.BeanPostProcessor;
+import com.chao.springframework.beans.factory.config.ConfigurableBeanFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * AbstractBeanFactory 继承实现了 SingletonBeanRegistry 的 DefaultSingletonBeanRegistry，
@@ -15,7 +20,9 @@ import com.chao.springframework.beans.factory.config.BeanDefinition;
  * getBean 并没有自身去实现这些方法，而是只定义了调用过程以及提供了抽象方法，由实现此抽象类的其他类做相应实现
  */
 
-public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory {
+public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory {
+
+    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
 
     @Override
     public Object getBean(String name) throws BeansException {
@@ -45,4 +52,14 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
     protected abstract BeanDefinition getBeanDefinition(String name);
 
     protected abstract Object createBean(String beanName, BeanDefinition beanDefinition, Object[] args) throws BeansException;
+
+    @Override
+    public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
+        this.beanPostProcessors.remove(beanPostProcessor);
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
+
+    public List<BeanPostProcessor> getBeanPostProcessors() {
+        return this.beanPostProcessors;
+    }
 }

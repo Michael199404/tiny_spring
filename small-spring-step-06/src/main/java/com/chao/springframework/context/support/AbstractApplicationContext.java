@@ -8,6 +8,7 @@ import com.chao.springframework.beans.factory.config.BeanPostProcessor;
 import com.chao.springframework.beans.factory.config.ConfigurableBeanFactory;
 import com.chao.springframework.context.ConfigurableApplicationContext;
 import com.chao.springframework.core.io.DefaultResourceLoader;
+import com.chao.springframework.core.io.Resource;
 
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         registerBeanPostProcessors(beanFactory);
 
         // 5. 提前实例化单例 Bean 对象
-        beanFactory
+        beanFactory.preInstantiateSingletons();
 
     }
 
@@ -46,9 +47,32 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     private void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory) {
         Map<String, BeanPostProcessor> beanPostProcessorMap = beanFactory.getBeansOfType(BeanPostProcessor.class);
         for (BeanPostProcessor beanPostProcessor : beanPostProcessorMap.values()) {
-            beanFactory.
+            beanFactory.addBeanPostProcessor(beanPostProcessor);
         }
     }
 
+    @Override
+    public <T> Map<String, T> getBeansOfType(Class<T> type) throws BeansException {
+        return getBeanFactory().getBeansOfType(type);
+    }
 
+    @Override
+    public String[] getBeanDefinitionNames() {
+        return getBeanFactory().getBeanDefinitionNames();
+    }
+
+    @Override
+    public Object getBean(String name) throws BeansException {
+        return getBeanFactory().getBean(name);
+    }
+
+    @Override
+    public Object getBean(String name, Object... args) throws BeansException {
+        return getBeanFactory().getBean(name, args);
+    }
+
+    @Override
+    public <T> T getBean(String name, Class<T> requiredType) throws BeansException {
+        return getBeanFactory().getBean(name, requiredType);
+    }
 }

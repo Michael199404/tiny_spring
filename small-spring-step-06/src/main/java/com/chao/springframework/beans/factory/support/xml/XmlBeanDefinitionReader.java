@@ -28,11 +28,6 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     }
 
     @Override
-    public ResourceLoader getResourceLoader() {
-        return null;
-    }
-
-    @Override
     public void loadBeanDefinitions(Resource resource) throws BeansException {
         try {
             try (InputStream inputStream = resource.getInputStream()) {
@@ -50,11 +45,20 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         }
     }
 
+
+
     @Override
     public void loadBeanDefinitions(String location) throws BeansException {
         ResourceLoader resourceLoader = getResourceLoader();
         Resource resource = resourceLoader.getResource(location);
         loadBeanDefinitions(resource);
+    }
+
+    @Override
+    public void loadBeanDefinitions(String... locations) throws BeansException {
+        for (String location : locations) {
+            loadBeanDefinitions(location);
+        }
     }
 
     protected void doLoadBeanDefinitions(InputStream inputstream) throws ClassNotFoundException {
