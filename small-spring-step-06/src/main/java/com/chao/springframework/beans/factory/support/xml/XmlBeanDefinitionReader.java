@@ -61,8 +61,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         }
     }
 
-    protected void doLoadBeanDefinitions(InputStream inputstream) throws ClassNotFoundException {
-        Document doc = XmlUtil.readXML(inputstream);
+    protected void doLoadBeanDefinitions(InputStream inputStream) throws ClassNotFoundException {
+        Document doc = XmlUtil.readXML(inputStream);
         Element root = doc.getDocumentElement();
         NodeList childNodes = root.getChildNodes();
 
@@ -101,12 +101,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 // 创建属性信息
                 PropertyValue propertyValue = new PropertyValue(attrName, value);
                 beanDefinition.getPropertyValues().addPropertyValue(propertyValue);
-                if (getRegistry().containsBeanDefinition(beanName)) {
-                    throw new BeansException("Duplicate beanName[" + beanName + "] is not allowed");
-                }
-                // 注册 BeanDefinition
-                getRegistry().registerBeanDefinition(beanName, beanDefinition);
             }
+            if (getRegistry().containsBeanDefinition(beanName)) {
+                throw new BeansException("Duplicate beanName[" + beanName + "] is not allowed");
+            }
+            // 注册 BeanDefinition
+            getRegistry().registerBeanDefinition(beanName, beanDefinition);
         }
     }
 }
