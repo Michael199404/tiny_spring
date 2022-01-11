@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.chao.springframework.beans.BeansException;
 import com.chao.springframework.beans.PropertyValue;
 import com.chao.springframework.beans.PropertyValues;
+import com.chao.springframework.beans.factory.DisposableBean;
 import com.chao.springframework.beans.factory.InitializingBean;
 import com.chao.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import com.chao.springframework.beans.factory.config.BeanDefinition;
@@ -37,6 +38,8 @@ public abstract class AbstractAutowiredCapableBeanFactory extends AbstractBeanFa
             throw new BeansException("Instantiation of bean failed", e);
         }
 
+        // 注册实现了 DisposableBean 接口的 Bean 对象
+        registerDisposableBeanIfNecessary(beanName, bean, beanDefinition);
         addSingleton(beanName, bean);
         return bean;
     }
@@ -93,7 +96,11 @@ public abstract class AbstractAutowiredCapableBeanFactory extends AbstractBeanFa
         Object wrappedBean = applyBeanPostProcessorsBeforeInitialization(bean, beanName);
 
         // 待完成内容：invokeInitMethods(beanName, wrappedBean, beanDefinition)
-        invokeInitMethods(beanName, bean, beanDefinition);
+        try {
+            invokeInitMethods(beanName, bean, beanDefinition);
+        } catch (Exception e) {
+            throw new BeansException("Invocation of init method of bean[" + beanName + "] failed", e);
+        }
 
         // 2. 执行 BeanPostProcessor After 处理
         wrappedBean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
@@ -114,6 +121,12 @@ public abstract class AbstractAutowiredCapableBeanFactory extends AbstractBeanFa
                 throw new BeansException("Could not find an init method named " + initMethodName + " on bean with name" + beanName);
             }
             initMethod.invoke(bean);
+        }
+    }
+
+    protected void registerDisposableBeanIfNecessary(String beanName, Object bean, BeanDefinition beanDefinition) {
+        if (bean instanceof DisposableBean || StringUtils.isNotEmpty(beanDefinition.getDestroyMethodName())) {
+            registerDisposableBean(beanName, new DisposableBeanAdapter(bean, beanName, beanDefinition));
         }
     }
 
