@@ -1,9 +1,0 @@
-com\chao\springframework\beans\factory\support\AbstractBeanFactory.class
-com\chao\springframework\beans\factory\BeanFactory.class
-com\chao\springframework\beans\factory\support\DefaultSingletonBeanRegistry.class
-com\chao\springframework\beans\BeansException.class
-com\chao\springframework\beans\factory\config\BeanDefinition.class
-com\chao\springframework\beans\factory\config\SingletonBeanRegistry.class
-com\chao\springframework\beans\factory\support\AbstractAutowiredCapableBeanFactory.class
-com\chao\springframework\beans\factory\support\BeanDefinitionRegistry.class
-com\chao\springframework\beans\factory\support\DefaultListableBeanFactory.class
