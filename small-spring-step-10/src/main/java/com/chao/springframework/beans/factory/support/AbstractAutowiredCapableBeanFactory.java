@@ -43,7 +43,6 @@ public abstract class AbstractAutowiredCapableBeanFactory extends AbstractBeanFa
         // 注册实现了 DisposableBean 接口的 Bean 对象
         registerDisposableBeanIfNecessary(beanName, bean, beanDefinition);
 
-        // 单例和原型模式的区别就是bean是否存放到内存中
         if (beanDefinition.isSingleton()) {
             addSingleton(beanName, bean);
         }
