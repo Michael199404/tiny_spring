@@ -2,7 +2,7 @@
 
 <beans>
 
-    <bean id="userService" class="com.chao.springframework.test.bean.UserService" scope="prototype">
+    <bean id="userService" class="com.chao.springframework.test.bean.UserService" scope="singleton">
         <property name="uId" value="10001"/>
         <property name="company" value="腾讯"/>
         <property name="location" value="深圳"/>
