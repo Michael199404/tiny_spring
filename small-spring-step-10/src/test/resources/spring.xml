@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+
+    <bean class="com.chao.springframework.test.event.ContextRefreshedEventListener"/>
+
+    <bean class="com.chao.springframework.test.event.CustomEvent"/>
+
+    <bean class="com.chao.springframework.test.event.ContextClosedEventListener"/>
+
+</beans>
