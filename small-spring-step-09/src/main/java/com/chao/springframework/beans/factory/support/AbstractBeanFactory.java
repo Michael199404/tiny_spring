@@ -55,11 +55,18 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         return (T) getObjectForBeanInstance(bean, name);
     }
 
+    /**
+     * 我们在得到 bean 的实例之后要做的第一步就是调用 getObjectForBeanInstance() 方法
+     * 检测当前的 bean 是否是 FactoryBean 类型的 bean，如果是，那么需要调用该 bean 对应
+     * 的 FactoryBean 实例中的 getObject() 作为返回值
+     */
     private Object getObjectForBeanInstance(Object beanInstance, String beanName) {
+        // 现在我们有了个 bean 实例，这个实例可能会是正常的 bean 或者是 FactoryBean
         if (!(beanInstance instanceof FactoryBean)) {
             return beanInstance;
         }
 
+        // 尝试从缓存中加载 bean
         Object object = getCachedObjectForFactoryBean(beanName);
 
         if (object == null) {
